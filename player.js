@@ -9,9 +9,9 @@ class Player {
         this.app = app;
         this.playerDom = document.querySelector(el);
         this.audio = this.playerDom.querySelector("audio");
-        this.playBtn = this.playerDom.querySelector("#play");
-        this.pauseBtn = this.playerDom.querySelector("#pause");
-        this.stopBtn = this.playerDom.querySelector("#stop");
+        this.playBtn = this.playerDom.querySelector(".play");
+        this.pauseBtn = this.playerDom.querySelector(".pause");
+        this.stopBtn = this.playerDom.querySelector(".stop");
 
         this.progressBar = this.playerDom.querySelector(".bar");
 
@@ -19,11 +19,12 @@ class Player {
         this.totalSpan = this.playerDom.querySelector(".total-time");
 
         this.progress = this.playerDom.querySelector(".progress");
-        this.fileName = this.playerDom.querySelector(".file-name");
+        this.fileName = this.playerDom.querySelector(".name");
 
         this.playable = false; // 현재 플레이가 가능한가?
 
         this.repeatMode = MODE.NO; //최초에는 반복 없음으로
+        
         this.modeBtnList = document.querySelectorAll(".repeat-btn");
 
         this.addListener();
@@ -65,12 +66,15 @@ class Player {
     play(){
         if(!this.playable) return;
         this.audio.play();
-        document.getElementById('play');
+        this.pauseBtn.classList.remove("hidden");
+        this.playBtn.classList.add("hidden");
     }
 
     pause(){
         if(!this.playable) return;
         this.audio.pause();
+        this.playBtn.classList.remove("hidden");
+        this.pauseBtn.classList.add("hidden");
     }
 
     stop(){

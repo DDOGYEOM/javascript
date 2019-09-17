@@ -11,6 +11,7 @@
     <script src="playList.js"></script>
     <link rel="stylesheet" href="app.css">
     <link href="/fontawesome-free-5.10.2-web/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="https://fonts.googleapis.com/css?family=Hi+Melody&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -19,7 +20,7 @@
             <div id="player">
                 <div class="info">
                     <div class="audio-info">
-                        <div class="file-name">재생할 음악이 없습니다.</div>
+                        <div class="file-name"><h2 class="name">재생할 음악이 없습니다.</h2></div>
                     </div>
                     <div class="time-info">
                         <span class="current-time">00:00:00</span>
@@ -32,9 +33,9 @@
                 <audio src="./example.mp3"></audio>
                 <div class="control">
                     <div class="control-btn">
-                        <i id="play" class="far fa-play-circle"></i>
-                        <i id="pause" class="far fa-pause-circle"></i>
-                        <i id="stop" class="far fa-stop-circle"></i>
+                        <div class="play hidden"><i class="far fa-play-circle"></i></div>
+                        <div class="pause"><i class="far fa-pause-circle"></i></div>
+                        <div class="stop"><i class="far fa-stop-circle"></i></div>
                     </div>
                     <div class="mode-btn">
                         <input type="radio" name="repeat" class="repeat-btn" value="0" checked>반복없음
@@ -52,7 +53,7 @@
                     <li class="item">sample4.mp3</li>
                 </ul>
                 <div class="button-row">
-                    <button id="openDialog">추가</button>
+                    <i id="openDialog" class="fas fa-folder-plus"></i>
                     <input type="file" id="audioFile" multiple>
                 </div>
             </div> <!-- end of playList -->
