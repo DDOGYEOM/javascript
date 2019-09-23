@@ -12,16 +12,51 @@ class PlayList {
 
         this.currentMusic = null;
 
+        //우클릭 메뉴
+        this.contextMenu = document.querySelector("#context");
+        this.contectTargetItem = null;
+
         this.addListener();
     }
 
     addListener(){
         this.addBtn.addEventListener("click", e => this.fileInput.click());
-        this.fileInput.addEventListener("change", this.addList.bind(this));
+        this.fileInput.addEventListener("change", this.inputChange.bind(this));
+
+        this.listDom.addEventListener("dragover", this.fileDragOver.bind(this));
+        this.listDom.addEventListener("drop", this.fileDrop.bind(this));
+
+        this.contextMenu.querySelector("#del").addEventListener("click",(e)=>{
+            console.log(this.contectTargetItem);
+            e.stopPropagation();
+        })
+
+        document.querySelector("body").addEventListener("click", (e)=> {
+            this.contextMenu.style.visibility = "hidden";
+        });
     }
 
-    addList(e) {
-        Array.from(e.target.files).forEach(file => {
+    fileDragOver(e){
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    fileDrop(e){
+        e.preventDefault();
+        e.stopPropagation();
+        let files = Array.from(e.dataTransfer.files);
+        this.addList(files);
+    }
+
+    inputChange(e){
+        let files = Array.from(e.target.files);
+        this.addList(files);
+    }
+
+    addList(files) {
+        files.forEach(file => {
+            if(file.type.substring(0, 5) !== "audio") {
+                return;
+            }
             let obj = {idx: this.fileList.length, file: file, dom: null};
             this.fileList.push(obj);
             let item = document.createElement("li");
@@ -31,6 +66,17 @@ class PlayList {
                 let data = this.fileList.find(x => x.idx == obj.idx);
                 this.playItem(data);
             });
+            
+            //음악에 우클릭시 행동
+            item.addEventListener("contextmenu", (e)=>{
+                e.preventDefault();
+                e.stopPropagation();
+                this.contectTargetItem = obj;//우클릭된 아이템이 들어간다.
+                this.contextMenu.style.top = e.pageY + "px";
+                this.contextMenu.style.left = e.pageX + "px";
+                this.contextMenu.style.visibility = "visible";
+            });
+
             item.innerHTML = file.name;
             this.itemList.appendChild(item);
         });
@@ -41,15 +87,15 @@ class PlayList {
             file.dom.classList.remove("active");
         });
 
-        this.currentMusic = data.idx; //현재 재생중인 음악의  idx를 저장
+        this.currentMusic = data.idx;  //현재 재생중인 음악의 idx를 저장
 
         data.dom.classList.add("active");
         this.app.player.loadMusic(data.file);
     }
 
-    getNextMusic(loop) {
+    getNextMusic(loop){
         let now = this.fileList.findIndex(x => x.idx == this.currentMusic);
-        if(now < this.fileList.length - 1) {
+        if(now < this.fileList.length - 1){
             this.playItem(this.fileList[now + 1]);
         }else if(loop){
             this.playItem(this.fileList[0]);
