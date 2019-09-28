@@ -154,6 +154,7 @@ ul {
     border-radius:5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     overflow: hidden;
+    list-style: none;
 }
 
 #context > li:hover {

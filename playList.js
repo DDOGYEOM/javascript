@@ -25,9 +25,11 @@ class PlayList {
 
         this.listDom.addEventListener("dragover", this.fileDragOver.bind(this));
         this.listDom.addEventListener("drop", this.fileDrop.bind(this));
+        console.log(this.listDom);
 
         this.contextMenu.querySelector("#del").addEventListener("click",(e)=>{
-            console.log(this.contectTargetItem);
+            this.fileList.splice(this.contectTargetItem.idx,1);
+            this.contectTargetItem.dom.remove();
             e.stopPropagation();
         })
 
@@ -75,6 +77,8 @@ class PlayList {
                 this.contextMenu.style.top = e.pageY + "px";
                 this.contextMenu.style.left = e.pageX + "px";
                 this.contextMenu.style.visibility = "visible";
+                console.log(e.pageY);
+                console.log(e.pageX);
             });
 
             item.innerHTML = file.name;
