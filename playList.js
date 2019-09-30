@@ -14,7 +14,7 @@ class PlayList {
 
         //우클릭 메뉴
         this.contextMenu = document.querySelector("#context");
-        this.contectTargetItem = null;
+        this.contextTargetItem = null;
 
         this.addListener();
     }
@@ -25,17 +25,58 @@ class PlayList {
 
         this.listDom.addEventListener("dragover", this.fileDragOver.bind(this));
         this.listDom.addEventListener("drop", this.fileDrop.bind(this));
-        console.log(this.listDom);
 
         this.contextMenu.querySelector("#del").addEventListener("click",(e)=>{
             this.fileList.splice(this.contectTargetItem.idx,1);
             this.contectTargetItem.dom.remove();
+        
+            this.contectTargetItem.style.visibility = "visible";
+        
             e.stopPropagation();
-        })
+        });
 
         document.querySelector("body").addEventListener("click", (e)=> {
             this.contextMenu.style.visibility = "hidden";
+            this.contextTargetItem = null;
         });
+        this.itemList.addEventListener("dragover", this.fileDrop.bind(this));
+        this.itemList.addEventListener("drop", this.itemDrop.bind(this));
+    }
+
+    itemDrop(e){
+        let data = e.dataTransfer.getData("idx");
+        if(data != ""){
+            e.stopPropagation();
+            e.preventDefault();
+            console.log("아이템 드랍");
+            let y = e.clientY; //마우스가 드랍된 y의 좌표를 구한다.
+            
+            let target = -1;
+        
+            for(let i = 0; i < this.fileList.length; i++){
+                console.log(y, this.fileList[i].dom.getBoundingClientRect().top);
+                if(this.fileList[i].dom.getBoundingClientRect().top > y){
+                    target = i;
+                    break;
+                }
+            }
+            console.log(target);
+            //find는 해당 조건을 만족하는 것이 나오면 true를 반환하는 거
+            let moveItem = this.fileList.find(x => x.idx == data * 1);
+            if(target >= 0){
+                this.itemList.insertBefore(moveItem.dom, this.fileList[target].dom);
+            }else {
+                this.itemList.appendChild(moveItem.dom);
+            }
+
+            this.fileList.sort( (a, b) => {
+                return a.dom.getBoundingClientRect().top
+                     - b.dom.getBoundingClientRect().top
+            });
+
+        }else {
+            console.log("파일 드랍 밑으로 이벤트 전파");
+        }
     }
 
     fileDragOver(e){
@@ -56,6 +97,7 @@ class PlayList {
 
     addList(files) {
         files.forEach(file => {
+            console.log(file);
             if(file.type.substring(0, 5) !== "audio") {
                 return;
             }
@@ -69,16 +111,21 @@ class PlayList {
                 this.playItem(data);
             });
             
+            item.setAttribute("draggable", true);
+            //item.removeAttribute("draggable");
+            item.addEventListener("dragstart", (e)=>{
+                e.dataTransfer.setData("idx", obj.idx);
+                e.dataTransfer.setDragImage(e.target, 0, 0);
+            });
+
             //음악에 우클릭시 행동
             item.addEventListener("contextmenu", (e)=>{
                 e.preventDefault();
                 e.stopPropagation();
-                this.contectTargetItem = obj;//우클릭된 아이템이 들어간다.
+                this.contextTargetItem = obj; // 우클릭된 아이템이 들어간다.
                 this.contextMenu.style.top = e.pageY + "px";
                 this.contextMenu.style.left = e.pageX + "px";
                 this.contextMenu.style.visibility = "visible";
-                console.log(e.pageY);
-                console.log(e.pageX);
             });
 
             item.innerHTML = file.name;
@@ -106,3 +153,15 @@ class PlayList {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+        

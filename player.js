@@ -79,6 +79,8 @@ class Player {
         });
     }
 
+    
+
     musicEnd() {
         //음악이 끝났을 때 해야할 일
         if(this.repeatMode == MODE.ONE){//한곡반복

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin:0; padding:0;
+            box-sizing: border-box;
+        }
+
+        .drag {
+            width:200px; height:200px;
+            background-color: blue;
+            display:inline-block;
+        }
+
+        #big {
+            width:420px;
+            height:400px;
+            background-color: rgb(200, 10, 50);
+            margin:20px auto;
+        }
+
+        section {
+            width:420px;
+            height:200px;
+            background-color: gray;
+            margin:20px auto;
+            display:flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="big" ondragenter="return dragEnter(event)" 
+      ondragover="return dragOver(event)">
+
+    </div>
+
+    <section ondragenter="return dragEnter(event)" 
+            ondragover="return dragOver(event)">
+        <div class="drag" draggable="true" id="boxA">BoxA</div>
+        <div class="drag" draggable="true" id="boxB">BoxB</div>
+    </section>
+
+    <script>
+        let list = document.querySelectorAll(".drag");
+        
+        list.forEach(x => x.addEventListener("dragstart", e =>{
+            e.dataTransfer.setDragImage(e.target, 0, 0);
+            e.dataTransfer.setData("gondr", e.target.getAttribute("id"));
+        }));
+
+        document.querySelector("#big").addEventListener("drop", (e)=>{
+            let gondr = e.dataTransfer.getData("gondr");
+            let target = document.querySelector(`#${gondr}`);
+            document.querySelector("#big").appendChild(target);
+        });
+
+        function dragEnter(e){
+            e.preventDefault();
+            return true;
+        }
+
+        function dragOver(e){
+            e.preventDefault();
+            return true;
+        }
+    </script>
+</body>
+</html>
+</html>

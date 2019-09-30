@@ -144,29 +144,28 @@ ul {
     margin: 0 auto;
 }
 
-#context{
+
+#context {
     position: fixed;
     top:0;
     left:0;
     visibility: hidden;
     width:100px;
-    /* background-color: #fff; */
+    background-color: #fff;
     border-radius:5px;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     overflow: hidden;
-    list-style: none;
 }
 
 #context > li:hover {
-    background-color: #7474f5;
+    background-color: #3f3fff;
     color:#fff;
 }
 
 #context > li {
-    padding: 8px 12px;
-    border-bottom: 1px solid #ddd; 
+    padding:8px 12px;
+    border-bottom:1px solid #ddd;
 }
-
 #context > li:last-child {
-    border-bottom: 0; 
+    border-bottom:0;
 }
