@@ -1,0 +1,171 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    background-color: rgb(247, 216, 210);
+    font-family: 'Hi Melody', cursive;
+}
+
+ul {
+    list-style: none;
+}
+
+#player {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.progress {
+    background-color: rgb(247, 154, 146);
+    border: 2px solid rgb(250, 238, 238);
+    height: 15px;
+    border-radius: 10px;
+}
+
+.bar {
+    width: 0;
+    height: 100%;
+    background-color: rgb(238, 108, 96);
+    border-radius: 10px;
+}
+
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.main-row {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.container {
+    margin:0 auto;
+    width:1200px;
+}
+
+#playList {
+    border:1px solid #ddd;
+    border-radius: 6px;
+    padding:20px;
+}
+
+#playList .item-list {
+    display: grid;
+    grid-gap: 10px;
+    grid-auto-rows: 40px;
+    margin-bottom: 10px;
+    height: 500px;
+    overflow-y: auto;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 1);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#playList .item {
+    width:100%;
+    color:rgb(26, 26, 26);
+    font-weight: 600;
+    background-color: #6A9AD9;
+    padding:8px 12px;
+    border-radius: 0.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size:16px;
+    user-select: none;
+}
+
+#playList .item.active {
+    background-color: #a985e7;
+}
+
+
+.control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.mode-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    border: 2px solid #474C59;
+    border-radius: 10px;
+}
+
+.mode-btn:nth-child(1) {
+    margin-left: 0;
+}
+
+.mode-btn > input {
+    margin-left: 20px;
+}
+
+
+.play {
+    margin-right: 10px;
+}
+
+#audioFile {
+    visibility: hidden;
+}
+
+.far {
+    margin: 10px 5px 10px 5px;
+    font-size: 25px;
+}
+
+#openDialog {
+    font-size: 30px;
+}
+
+.hidden {
+    display: none;
+}
+
+.visualizer {
+    width: 800px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+
+#context {
+    position: fixed;
+    top:0;
+    left:0;
+    visibility: hidden;
+    width:100px;
+    background-color: #fff;
+    border-radius:5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+#context > li:hover {
+    background-color: #3f3fff;
+    color:#fff;
+}
+
+#context > li {
+    padding:8px 12px;
+    border-bottom:1px solid #ddd;
+}
+#context > li:last-child {
+    border-bottom:0;
+}

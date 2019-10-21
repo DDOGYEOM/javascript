@@ -4,7 +4,7 @@ const MODE = {
     "LIST":2
 };
 
-class Player {
+export default class Player {
     constructor(el,app){
         this.app = app;
         this.playerDom = document.querySelector(el);

@@ -1,0 +1,32 @@
+{
+  "name": "javascript",
+  "version": "1.0.0",
+  "description": "응프 화면구현 js로 만드는 뮤직 플레이어",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron index.js",
+    "watch" : "webpack --watch --progress",
+    "prod" : "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DDOGYEOM/javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DDOGYEOM/javascript/issues"
+  },
+  "homepage": "https://github.com/DDOGYEOM/javascript#readme",
+  "devDependencies": {
+    "asar": "^2.0.1",
+    "css-loader": "^3.2.0",
+    "electron": "^6.0.12",
+    "electron-packager": "^14.0.6",
+    "mini-css-extract-plugin": "^0.8.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
+  }
+}

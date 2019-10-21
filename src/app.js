@@ -1,3 +1,10 @@
+import Player from "../Player.js";
+import PlayList from "../PlayList.js";
+
+import {ipcRenderer} from 'electron';
+
+import "../app.css";
+
 Number.prototype.timeFormat = function(){
     let h = "0" + Math.floor(this / 3600);
     h = h.substring(h.length - 2, h.length);
@@ -18,3 +25,9 @@ class App{
 window.addEventListener("load", ()=>{
     let app = new App("#player", "#playList");
 });
+
+window.addEventListener("keydown",(e)=>{
+    if(e.ctrlKey && e.key.toLowerCase() == "q"){
+        ipcRenderer.send("openDev");
+    }
+})
