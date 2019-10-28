@@ -1,24 +1,25 @@
 {
-  "name": "javascript",
+  "name": "player",
   "version": "1.0.0",
   "description": "응프 화면구현 js로 만드는 뮤직 플레이어",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "electron index.js",
-    "watch" : "webpack --watch --progress",
-    "prod" : "webpack --mode=production"
+    "watch": "webpack --watch --progress",
+    "prod": "webpack --mode=production",
+    "x64build": "electron-packager . player --platform=win32n --asar --arch=x64 --out=dist64 --overwrite"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DDOGYEOM/javascript.git"
+    "url": "git+https://github.com/gondr99/jsplayer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DDOGYEOM/javascript/issues"
+    "url": "https://github.com/gondr99/jsplayer/issues"
   },
-  "homepage": "https://github.com/DDOGYEOM/javascript#readme",
+  "homepage": "https://github.com/gondr99/jsplayer#readme",
   "devDependencies": {
     "asar": "^2.0.1",
     "css-loader": "^3.2.0",

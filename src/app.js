@@ -26,8 +26,8 @@ window.addEventListener("load", ()=>{
     let app = new App("#player", "#playList");
 });
 
-window.addEventListener("keydown",(e)=>{
+window.addEventListener("keydown", (e)=>{
     if(e.ctrlKey && e.key.toLowerCase() == "q"){
         ipcRenderer.send("openDev");
     }
-})
+});
